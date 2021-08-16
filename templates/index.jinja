@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<title>Manager {{ title }}</title>
+
+  <style>
+    .terminal_form {
+
+      margin: auto;
+      width: 50%;
+      padding: 10px;
+    }
+
+    .table_report {
+      margin: 15px;
+    }
+    
+    .left_label {
+      position: absolute;
+      left: auto;
+      width: 100px;
+      height: 120px;
+      border: 3px solid blue;
+    } 
+
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <body>
+    <center>
+      <form action="/terminal" class="terminal_form w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin " method="post">
+        <h2 class="w3-center">Terminal</h2>
+        {% if err %}
+          <h9 ><font color="red">{{err}}</font> </h9>
+        {% endif %}
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
+          <div class="w3-rest">
+           <input type="text" class="w3-input w3-border " name="terminal" id="terminal" placeholder="terminal">
+          </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+          <div class="w3-rest">
+          <input type="text" class="w3-input w3-border "  name="user" id="user"  placeholder="user">
+          </div>
+        </div>
+
+
+
+        <p class="w3-center">
+          <button class="w3-button w3-section w3-blue w3-ripple" name="action" value="taken"> Taken </button>
+          <button class="w3-button w3-section w3-blue w3-ripple" name="action" value="return"> Return </button>
+          <br> Free:{{countFreeTermianl}}  Busy: {{countBusyTerminal}}
+        </p>
+      </form>
+    </center>
+    <center>
+      <form action="/data" method="post" class="terminal_form w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin ">
+        <button class="w3-button w3-section w3-blue w3-ripple" name="action"  value="download"> Downlaod CSV </button>
+        <button class="w3-button w3-section w3-blue w3-ripple" name="action"  value="delete"> Delete all of reports </button>
+      </form>
+    </center>
+    <table class="table_report w3-table w3-bordered w3-striped w3-border test w3-hoverable">
+      <tbody>
+        <tr class="w3-green">
+          <th>Terminal SN</th>
+          <th>User</th>
+          <th>Last User</th>
+          <th>Taken Time</th>
+        </tr>
+      </tbody>
+
+      <tbody>
+        {% for terminal in busyTerminals %}
+         <tr>
+          <td>{{ terminal.terminal|e }}</td>
+          <td>{{ terminal.user|e }}</td>
+          <td>{{ terminal.lastUser|e }}</td>
+          <td>{{ terminal.takenTime|e }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+
+</html>
+

@@ -1,0 +1,10 @@
+[Unit]
+Description=terminal app service
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/home/karimi/amin2/amin-terminal
+Environment="PATH=/home/karimi/amin2/amin-terminal/amin-project/bin"
+ExecStart=/usr/local/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
