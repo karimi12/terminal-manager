@@ -93,7 +93,7 @@ def getBusyTerminals():
             "id": tr[0],
             "user": tr[1],
             "terminal": tr[2],
-            "takenTime": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[3]+7200)),
+            "takenTime": time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[3])),
             "lastUser": getLastUser(tr[2]),
         }
         r.append(a)
@@ -111,10 +111,10 @@ def createCSV():
     csvStr="Id,User,Terminal,Taken Time, Return Time,Work Time\n"
     for tr in rows:
         if (type(tr[4]) != float) :
-            csvStr=csvStr+"{}, {}, {}, {}, -, -\n".format(tr[0],tr[1],tr[2], time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[3]+7200)))
+            csvStr=csvStr+"{}, {}, {}, {}, -, -\n".format(tr[0],tr[1],tr[2], time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[3])))
         else:
             work = tr[4] - tr[3]
-            csvStr=csvStr+"{}, {}, {}, {}, {}, {}\n".format(tr[0],tr[1],tr[2], time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[3]+7200)),time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[4]+7200)),time.strftime("%H:%M:%S", time.gmtime(work)))
+            csvStr=csvStr+"{}, {}, {}, {}, {}, {}\n".format(tr[0],tr[1],tr[2], time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[3])),time.strftime("%d/%m/%Y %H:%M:%S", time.gmtime(tr[4])),time.strftime("%H:%M:%S", time.gmtime(work)))
 
     conn.close()
     f.write(csvStr)
