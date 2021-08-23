@@ -134,7 +134,7 @@ def insertToDb(user, termianl):
     if (len(rows) == 0 and len(rows2) == 0):
         # cur = conn.cursor()
         cur.execute("insert into Usage (User,Terminal,TakenTime,ReturnTime) values ('{}', '{}', {},'Null') ".format(
-            user, termianl, datetime.now().timestamp()))
+            user, termianl, datetime.now().timestamp()+7200))
         conn.commit()
         conn.close()
         return cur.lastrowid
