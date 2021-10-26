@@ -168,7 +168,7 @@ def rturnTerminal(terminal):
     conn = sqlite3.connect('Usage.db')
     cur = conn.cursor()
     cur.execute("update Usage set ReturnTime={} where Terminal = '{}' and ReturnTime = 'Null'".format(
-        datetime.now().timestamp(), terminal))
+        datetime.now().timestamp()+7200, terminal))
     conn.commit()
     conn.close()
 
